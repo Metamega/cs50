@@ -1,4 +1,4 @@
-/* This program is for CS50  problem set 1. Takes a user input number and verifires whether its a valid
+/* This program takes a user input number and verifires whether its a valid
 Mastercard, Visa, or Amex. It relies on user inputting correct length number. 
 It will keep asking for input if string is entered. Also uses checksum algorithm
 described below to verify if is a valid credit card number*/
@@ -9,6 +9,8 @@ described below to verify if is a valid credit card number*/
 // Sum the left over digits      IE: 13579 return: 5 , 3
 // Sum the totals, if ends in 0, check sum is validated
 //                               IE: 11 + 8 = 19 return: false
+//https://developer.paypal.com/docs/classic/payflow/payflow-pro/payflow-pro-testing/#credit-card-numbers-for-testing 
+//used to test numbers
 #include <stdio.h>
 #include <cs50.h>
 #include <cs50.c>
@@ -21,10 +23,10 @@ int main(void)
     // Get user input for Credit card number
     long long n = get_long_long("Enter Valid Credit Card Number: ");
 
+    
+    int x, y , z, sum_1, sum_2;
+    x = y = z = sum_1 = sum_2  =  0; // Initialize variables
    
-    int x, y , z, sum_1, sum_2, total_sum, valid;
-    x = y = z = sum_1 = sum_2 = total_sum= valid =  0; // Initialize variables
-
     for (int i = 1; i < 16; i += 2)
     {
         x = nthdig(i, n) * 2;       // Getting first digits and * 2
@@ -42,32 +44,31 @@ int main(void)
         sum_2 += z;
     } 
 
-    total_sum = sum_1 + sum_2; // Sums both results together
-                                     
-   
+    int total_sum = sum_1 + sum_2; // Sums both results together
+    int valid;
     if (total_sum % 10 == 0) // If last digit of sums is 0, True else False
     {
-        int valid = 1;
-        printf("Valid");
+        valid = 1;
     }
     else
     {
-        valid == 0;
-        printf("Invalid");
+        valid = 0;
     }
 
      /********Logic for which type of card number was entered */// 
-
-    if (n >= 40 && n <= 49 && digits == 14 && valid)
+    int length = card_length(n); // get card length
+    int begin = two_dig(n); // get first two digits 
+    
+    if (begin >= 40 && begin <= 49 && length == 16 && valid)
     {
         printf("VISA\n"); // Visa numbers are 16 digits long and begin with 4
     }
-    else if (n == 34 || n == 37 && digits == 13 && valid)
+    else if (begin == 34 || begin == 37 && length == 13 && valid)
     {
         printf("AMEX\n"); // Amex numbers begin with 34 or 37 and are 15 long
         
     }
-    else if (n > 50 && n < 56 && digits == 14 && valid)
+    else if (begin > 50 && begin < 56 && length == 16 && valid)
     {
         printf("MASTERCARD\n"); // Mastercard begin with 51, 52, 53, 54, 55
     }                           // and are 16 digits long
@@ -112,3 +113,4 @@ int two_dig(long long a)        // Function returns first two digits of number
 
     return b;
 }
+
