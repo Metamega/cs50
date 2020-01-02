@@ -1,4 +1,5 @@
-/* This program takes a user input number and verifires whether its a valid
+/* CS50 course problem set 1 homework.
+This program takes a user input number and verifires whether its a valid
 Mastercard, Visa, or Amex. It relies on user inputting correct length number. 
 It will keep asking for input if string is entered. Also uses checksum algorithm
 described below to verify if is a valid credit card number*/
