@@ -63,7 +63,7 @@ int main(void)
     {
         printf("VISA\n"); // Visa numbers are 16 digits long and begin with 4
     }
-    else if (begin == 34 || begin == 37 && length == 13 && valid)
+    else if (begin == 34 || begin == 37 && length == 15 && valid)
     {
         printf("AMEX\n"); // Amex numbers begin with 34 or 37 and are 15 long
         
